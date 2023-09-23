@@ -10,6 +10,14 @@ app.set("views", "./app/views");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.use(
+    session({
+        secret: "Hello node",
+        resave: false,
+        saveUninitialized: false
+    })
+)
+
 var rotas   = require("./app/routes/router");
 app.use("/", rotas);
 

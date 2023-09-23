@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var bcrypt = express.Router();
+var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 
 var fabricaDeConexao = require("../../config/connection-factory");
@@ -63,8 +63,6 @@ router.get("/adm", function(req, res){
     res.render("pages/adm", {retorno: null, erros: null})}
 );
 
-
-
 router.post("/produto", function(req, res){
     res.json(req.body)
 });
@@ -103,6 +101,7 @@ router.post(
             res.render("pages/cadastro", {listaErros: erros, valores: req.body})
         }
     });
+
 router.get("/adm", verificarUsuAutenticado([2, 3], "pages/restrito"), function(req,res){
     res.render("pages/adm", req.session.autenticado);
 });
